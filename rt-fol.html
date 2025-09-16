@@ -5,86 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Shopify Developer Portfolio — [Your Name]</title>
   <meta name="color-scheme" content="light dark" />
-  <style>
-    :root {
-      --bg:#0e0f12; --bg-soft:#151821; --text:#e8ecf1; --muted:#a9b0be;
-      --brand:#7c5cff; --brand-2:#00d4ff; --card:#11141b; --card-border:rgba(255,255,255,.06);
-      --shadow:0 10px 30px rgba(0,0,0,.25); --radius:14px; --grad:radial-gradient(1000px 500px at 10% -10%, rgba(124,92,255,.2), transparent 60%), radial-gradient(1000px 500px at 110% 10%, rgba(0,212,255,.18), transparent 60%);
-    }
-    :root.light {
-      --bg:#f7f8fb; --bg-soft:#fff; --text:#14161a; --muted:#535c6a;
-      --brand:#6a58ff; --brand-2:#00c2ff; --card:#fff; --card-border:rgba(0,0,0,.08);
-      --shadow:0 10px 30px rgba(0,0,0,.08); --grad:radial-gradient(900px 450px at 10% -10%, rgba(106,88,255,.12), transparent 60%), radial-gradient(900px 450px at 110% 10%, rgba(0,194,255,.12), transparent 60%);
-    }
-    *{box-sizing:border-box}html,body{margin:0;padding:0}img{display:block;max-width:100%}
-    body{font-family:Segoe UI,Tahoma,sans-serif;color:var(--text);background:var(--bg);background-image:var(--grad);background-attachment:fixed;line-height:1.6}
-    a{color:inherit;text-decoration:none}
-
-    header{position:sticky;top:0;z-index:10;padding:16px;border-bottom:1px solid var(--card-border);backdrop-filter:saturate(140%) blur(10px);background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 40%)}
-    .nav{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px}
-    .brand{font-weight:700;background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
-    .nav-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}x
-    .nav-links a{color:var(--muted);padding:6px 10px;border-radius:999px}
-    .nav-links a:hover{color:var(--text);background:rgba(124,92,255,.08)}
-    .actions{display:flex;justify-content:end;gap:8px;flex-wrap:wrap}
-    .btn{padding:8px 12px;border-radius:999px;border:1px solid var(--card-border);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(0,0,0,.12));color:var(--text);cursor:pointer;font-size:.95rem}
-    .btn.primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));border-color:transparent;color:#0b1020;font-weight:600}
-
-    main{display:block}
-    section{max-width:1100px;margin:0 auto;padding:28px 14px}
-
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:center;margin-top:8px}
-    .card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);box-shadow:var(--shadow)}
-    .hero-card{padding:22px}
-    .kicker{display:inline-block;font-size:.85rem;color:var(--muted);border:1px solid var(--card-border);border-radius:999px;padding:4px 10px;background:rgba(124,92,255,.08)}
-    h1{margin:12px 0 8px 0;font-size:clamp(1.8rem,2.8vw,2.5rem)}
-    .gradient-text{background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .hero p{color:var(--muted);max-width:62ch}
-    .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .badge{font-size:.82rem;color:var(--muted);border:1px dashed rgba(124,92,255,.35);border-radius:999px;padding:6px 10px;background:rgba(124,92,255,.06)}
-    .hero-fig{min-height:260px;position:relative;overflow:hidden}
-    .hero-fig::before,.hero-fig::after{content:"";position:absolute;border-radius:50%;filter:blur(18px);mix-blend-mode:screen;opacity:.8}
-    .hero-fig::before{width:160px;height:160px;background:#7c5cff;top:-20px;left:-20px}
-    .hero-fig::after{width:130px;height:130px;background:#00d4ff;bottom:-30px;right:-30px}
-
-    .section-title{text-align:center;margin:0 0 6px 0;font-size:1.5rem}
-    .section-sub{text-align:center;color:var(--muted);margin:0 auto 16px;max-width:68ch}
-
-    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
-    .project-card{overflow:hidden;transition:transform .2s ease}
-    .project-card:hover{transform:translateY(-6px)}
-    .project-media{aspect-ratio:16/10;overflow:hidden;background:var(--bg-soft)}
-    .project-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform .3s}
-    .project-card:hover .project-media img{transform:scale(1.08)}
-    .project-content{padding:14px}
-    .tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
-    .tag{font-size:.78rem;color:var(--muted);border:1px solid var(--card-border);border-radius:8px;padding:4px 8px}
-
-    .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .skill-card{padding:14px}
-
-    footer{text-align:center;color:var(--muted);border-top:1px solid var(--card-border);padding:24px 14px;margin-top:24px}
-
-    @media (max-width:900px){
-      .hero{grid-template-columns:1fr}
-      .hero-fig{min-height:200px}
-    }
-    @media (max-width:700px){
-      header{padding:12px}
-      .nav{grid-template-columns:1fr;gap:8px}
-      .brand{text-align:center}
-      .actions{justify-content:center}
-      .nav-links{justify-content:center}
-      section{padding:22px 12px}
-      .projects{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
-    }
-    @media (max-width:480px){
-      .btn{width:100%;text-align:center}
-      .projects{grid-template-columns:1fr}
-      .skills{grid-template-columns:1fr}
-      .hero-card{padding:16px}
-    }
-  </style>
+  <link rel="stylesheet" href="rt.css">
 </head>
 <body>
   <header>
@@ -438,17 +359,6 @@
   <footer>
     © 2025 [Your Name]. All rights reserved.
   </footer>
-
-  <script>
-    // Theme toggle
-    const root = document.documentElement;
-    const btn = document.getElementById('themeToggle');
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light') root.classList.add('light');
-    btn.addEventListener('click', () => {
-      root.classList.toggle('light');
-      localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
-    });
-  </script>
+  <script src="rt.js"></script>
 </body>
 </html>
