@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Shopify Developer Portfolio — [Your Name]</title>
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root {
+      --bg:#0e0f12; --bg-soft:#151821; --text:#e8ecf1; --muted:#a9b0be;
+      --brand:#7c5cff; --brand-2:#00d4ff; --card:#11141b; --card-border:rgba(255,255,255,.06);
+      --shadow:0 10px 30px rgba(0,0,0,.25); --radius:14px; --grad:radial-gradient(1000px 500px at 10% -10%, rgba(124,92,255,.2), transparent 60%), radial-gradient(1000px 500px at 110% 10%, rgba(0,212,255,.18), transparent 60%);
+    }
+    :root.light {
+      --bg:#f7f8fb; --bg-soft:#fff; --text:#14161a; --muted:#535c6a;
+      --brand:#6a58ff; --brand-2:#00c2ff; --card:#fff; --card-border:rgba(0,0,0,.08);
+      --shadow:0 10px 30px rgba(0,0,0,.08); --grad:radial-gradient(900px 450px at 10% -10%, rgba(106,88,255,.12), transparent 60%), radial-gradient(900px 450px at 110% 10%, rgba(0,194,255,.12), transparent 60%);
+    }
+    *{box-sizing:border-box}html,body{margin:0;padding:0}img{display:block;max-width:100%}
+    body{font-family:Segoe UI,Tahoma,sans-serif;color:var(--text);background:var(--bg);background-image:var(--grad);background-attachment:fixed;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+
+    header{position:sticky;top:0;z-index:10;padding:16px;border-bottom:1px solid var(--card-border);backdrop-filter:saturate(140%) blur(10px);background:linear-gradient(180deg,rgba(0,0,0,.25),transparent 40%)}
+    .nav{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px}
+    .brand{font-weight:700;background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+    .nav-links{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+    .nav-links a{color:var(--muted);padding:6px 10px;border-radius:999px}
+    .nav-links a:hover{color:var(--text);background:rgba(124,92,255,.08)}
+    .actions{display:flex;justify-content:end;gap:8px;flex-wrap:wrap}
+    .btn{padding:8px 12px;border-radius:999px;border:1px solid var(--card-border);background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(0,0,0,.12));color:var(--text);cursor:pointer;font-size:.95rem}
+    .btn.primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));border-color:transparent;color:#0b1020;font-weight:600}
+
+    main{display:block}
+    section{max-width:1100px;margin:0 auto;padding:28px 14px}
+
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:center;margin-top:8px}
+    .card{background:var(--card);border:1px solid var(--card-border);border-radius:var(--radius);box-shadow:var(--shadow)}
+    .hero-card{padding:22px}
+    .kicker{display:inline-block;font-size:.85rem;color:var(--muted);border:1px solid var(--card-border);border-radius:999px;padding:4px 10px;background:rgba(124,92,255,.08)}
+    h1{margin:12px 0 8px 0;font-size:clamp(1.8rem,2.8vw,2.5rem)}
+    .gradient-text{background:linear-gradient(90deg,var(--brand),var(--brand-2));-webkit-background-clip:text;background-clip:text;color:transparent}
+    .hero p{color:var(--muted);max-width:62ch}
+    .badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .badge{font-size:.82rem;color:var(--muted);border:1px dashed rgba(124,92,255,.35);border-radius:999px;padding:6px 10px;background:rgba(124,92,255,.06)}
+    .hero-fig{min-height:260px;position:relative;overflow:hidden}
+    .hero-fig::before,.hero-fig::after{content:"";position:absolute;border-radius:50%;filter:blur(18px);mix-blend-mode:screen;opacity:.8}
+    .hero-fig::before{width:160px;height:160px;background:#7c5cff;top:-20px;left:-20px}
+    .hero-fig::after{width:130px;height:130px;background:#00d4ff;bottom:-30px;right:-30px}
+
+    .section-title{text-align:center;margin:0 0 6px 0;font-size:1.5rem}
+    .section-sub{text-align:center;color:var(--muted);margin:0 auto 16px;max-width:68ch}
+
+    .projects{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+    .project-card{overflow:hidden;transition:transform .2s ease}
+    .project-card:hover{transform:translateY(-6px)}
+    .project-media{aspect-ratio:16/10;overflow:hidden;background:var(--bg-soft)}
+    .project-media img{width:100%;height:100%;object-fit:cover;transform:scale(1.02);transition:transform .3s}
+    .project-card:hover .project-media img{transform:scale(1.08)}
+    .project-content{padding:14px}
+    .tags{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+    .tag{font-size:.78rem;color:var(--muted);border:1px solid var(--card-border);border-radius:8px;padding:4px 8px}
+
+    .skills{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+    .skill-card{padding:14px}
+
+    footer{text-align:center;color:var(--muted);border-top:1px solid var(--card-border);padding:24px 14px;margin-top:24px}
+
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr}
+      .hero-fig{min-height:200px}
+    }
+    @media (max-width:700px){
+      header{padding:12px}
+      .nav{grid-template-columns:1fr;gap:8px}
+      .brand{text-align:center}
+      .actions{justify-content:center}
+      .nav-links{justify-content:center}
+      section{padding:22px 12px}
+      .projects{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+    }
+    @media (max-width:480px){
+      .btn{width:100%;text-align:center}
+      .projects{grid-template-columns:1fr}
+      .skills{grid-template-columns:1fr}
+      .hero-card{padding:16px}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="nav">
+      <div class="brand">[Your Name] · Shopify Dev</div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div class="actions">
+        <button class="btn" id="themeToggle" type="button" aria-label="Toggle theme">🌗 Theme</button>
+        <a class="btn primary" href="mailto:you@example.com">Let’s Talk</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="card hero-card">
+        <span class="kicker">Shopify Expert • Themes • Apps • CRO</span>
+        <h1>I build high‑converting <span class="gradient-text">Shopify</span> stores that scale.</h1>
+        <p>Theme development, custom sections, app integrations, subscriptions, and performance optimizations. Fast, maintainable, revenue‑driving stores.</p>
+        <div class="badges">
+          <span class="badge">Custom Liquid</span>
+          <span class="badge">App Integrations</span>
+          <span class="badge">Speed 90–100</span>
+        </div>
+        <div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+          <a class="btn primary" href="#projects">View Work</a>
+          <a class="btn" href="#contact">Get a Quote</a>
+        </div>
+      </div>
+      <div class="card hero-fig" aria-hidden="true"></div>
+    </section>
+
+    <section id="projects">
+      <h2 class="section-title">Projects</h2>
+      <p class="section-sub">A selection of 14 recent Shopify builds and customizations.</p>
+
+      <div class="projects">
+        <!-- 1 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1549298916-b41d501d3772?q=80&w=1200&auto=format&fit=crop" alt="Fashion store" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Fashion Store</h3>
+            <p style="margin:0;color:var(--muted)">Custom theme, product filtering, optimized checkout.</p>
+            <div class="tags"><span class="tag">Liquid</span><span class="tag">Sections</span><span class="tag">CRO</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#" target="_blank" rel="nofollow noopener">Live</a>
+              <a class="btn" href="#" target="_blank" rel="nofollow noopener">Case Study</a>
+            </div>
+          </div>
+        </article>
+        <!-- 2 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1200&auto=format&fit=crop" alt="Electronics store" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Electronics Store</h3>
+            <p style="margin:0;color:var(--muted)">Dawn-based build with speed optimizations and custom sections.</p>
+            <div class="tags"><span class="tag">Dawn</span><span class="tag">Perf</span><span class="tag">Accessibility</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#" target="_blank" rel="nofollow noopener">Live</a>
+              <a class="btn" href="#" target="_blank" rel="nofollow noopener">Repo</a>
+            </div>
+          </div>
+        </article>
+        <!-- 3 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1200&auto=format&fit=crop" alt="Beauty brand store" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Beauty Brand</h3>
+            <p style="margin:0;color:var(--muted)">Subscription bundles and checkout UI extensions.</p>
+            <div class="tags"><span class="tag">Subscriptions</span><span class="tag">Checkout UI</span><span class="tag">App Proxy</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Case Study</a>
+            </div>
+          </div>
+        </article>
+        <!-- 4 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1520975604838-0a85b7a2a8b0?q=80&w=1200&auto=format&fit=crop" alt="Home goods store" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Home Goods</h3>
+            <p style="margin:0;color:var(--muted)">Mega menu, predictive search, and metafield-driven PDP.</p>
+            <div class="tags"><span class="tag">Metafields</span><span class="tag">Search</span><span class="tag">UX</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Case Study</a>
+            </div>
+          </div>
+        </article>
+        <!-- 5 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1200&auto=format&fit=crop" alt="Accessories store" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Accessories</h3>
+            <p style="margin:0;color:var(--muted)">Custom product configurator with cart attributes.</p>
+            <div class="tags"><span class="tag">Ajax Cart</span><span class="tag">JS</span><span class="tag">Sections</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Repo</a>
+            </div>
+          </div>
+        </article>
+        <!-- 6 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1200&auto=format&fit=crop" alt="Audio store" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Audio Pro</h3>
+            <p style="margin:0;color:var(--muted)">Headless Hydrogen storefront with Remix routes.</p>
+            <div class="tags"><span class="tag">Hydrogen</span><span class="tag">Remix</span><span class="tag">GraphQL</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Repo</a>
+            </div>
+          </div>
+        </article>
+        <!-- 7 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?q=80&w=1200&auto=format&fit=crop" alt="Outdoors brand" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Outdoors</h3>
+            <p style="margin:0;color:var(--muted)">Localization, multi-currency, and internationalization.</p>
+            <div class="tags"><span class="tag">Markets</span><span class="tag">i18n</span><span class="tag">Geolocation</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Case Study</a>
+            </div>
+          </div>
+        </article>
+        <!-- 8 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1200&auto=format&fit=crop" alt="Sneaker store" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Sneaker Lab</h3>
+            <p style="margin:0;color:var(--muted)">Server-side rendering, image CDNs, and lazy loading.</p>
+            <div class="tags"><span class="tag">Perf</span><span class="tag">Lighthouse</span><span class="tag">SEO</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Case Study</a>
+            </div>
+          </div>
+        </article>
+        <!-- 9 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1492684223066-81342ee5ff30?q=80&w=1200&auto=format&fit=crop" alt="Jewelry brand" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Jewelry</h3>
+            <p style="margin:0;color:var(--muted)">Gift wrap, upsells, and post-purchase offers.</p>
+            <div class="tags"><span class="tag">Checkout Ext</span><span class="tag">Upsell</span><span class="tag">AOV</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Case Study</a>
+            </div>
+          </div>
+        </article>
+        <!-- 10 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1523381294911-8d3cead13475?q=80&w=1200&auto=format&fit=crop" alt="Kids apparel" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Kids Apparel</h3>
+            <p style="margin:0;color:var(--muted)">Filters 2.0, collection merchandising, and badges.</p>
+            <div class="tags"><span class="tag">Faceted Filter</span><span class="tag">Merch</span><span class="tag">UI</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Case Study</a>
+            </div>
+          </div>
+        </article>
+        <!-- 11 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=1200&auto=format&fit=crop" alt="Cosmetics DTC" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Cosmetics DTC</h3>
+            <p style="margin:0;color:var(--muted)">Theme app extension with custom blocks.</p>
+            <div class="tags"><span class="tag">App Ext</span><span class="tag">Blocks</span><span class="tag">CLI</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Repo</a>
+            </div>
+          </div>
+        </article>
+        <!-- 12 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1490474418585-ba9bad8fd0ea?q=80&w=1200&auto=format&fit=crop" alt="Gourmet foods" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Gourmet Foods</h3>
+            <p style="margin:0;color:var(--muted)">B2B price lists and gated content.</p>
+            <div class="tags"><span class="tag">B2B</span><span class="tag">Customer Tags</span><span class="tag">Theme</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Case Study</a>
+            </div>
+          </div>
+        </article>
+        <!-- 13 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1514986888952-8cd320577b69?q=80&w=1200&auto=format&fit=crop" alt="Fitness brand" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Fitness</h3>
+            <p style="margin:0;color:var(--muted)">Quiz funnel, PDP personalization, and analytics.</p>
+            <div class="tags"><span class="tag">Analytics</span><span class="tag">Quiz</span><span class="tag">Personalization</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Case Study</a>
+            </div>
+          </div>
+        </article>
+        <!-- 14 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1483982258113-b72862e6cff6?q=80&w=1200&auto=format&fit=crop" alt="Art prints store" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Art Prints</h3>
+            <p style="margin:0;color:var(--muted)">Custom gallery layouts and AR previews.</p>
+            <div class="tags"><span class="tag">3D/AR</span><span class="tag">Media</span><span class="tag">UX</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Case Study</a>
+            </div>
+          </div>
+        </article>
+        <!-- 15 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1483982258113-b72862e6cff6?q=80&w=1200&auto=format&fit=crop" alt="Art prints store" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Art Prints</h3>
+            <p style="margin:0;color:var(--muted)">Custom gallery layouts and AR previews.</p>
+            <div class="tags"><span class="tag">3D/AR</span><span class="tag">Media</span><span class="tag">UX</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Case Study</a>
+            </div>
+          </div>
+        </article>
+        <!-- 16 -->
+        <article class="card project-card">
+          <div class="project-media">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1483982258113-b72862e6cff6?q=80&w=1200&auto=format&fit=crop" alt="Art prints store" />
+          </div>
+          <div class="project-content">
+            <h3 style="margin:0 0 6px 0">Art Prints</h3>
+            <p style="margin:0;color:var(--muted)">Custom gallery layouts and AR previews.</p>
+            <div class="tags"><span class="tag">3D/AR</span><span class="tag">Media</span><span class="tag">UX</span></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn" href="#">Live</a><a class="btn" href="#">Case Study</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="about">
+      <h2 class="section-title">About</h2>
+      <p class="section-sub">I specialize in Shopify themes, checkout extensibility, subscriptions, and performance.</p>
+      <div class="card" style="padding:16px;max-width:900px;margin:12px auto 0">
+        <p style="margin:0 0 10px 0;color:var(--muted)">
+          I’m a Shopify developer focused on building high‑converting storefronts that are fast, accessible, and easy to scale. I combine hands‑on theme expertise with AI‑assisted workflows to move faster without sacrificing quality.
+        </p>
+        <ul style="margin:0;color:var(--muted);padding-left:18px">
+          <li>AI audits to surface UX, accessibility, and performance fixes before they cost revenue</li>
+          <li>Content generation and localization tuned to your brand voice and conversion goals</li>
+          <li>LLM‑powered QA for theme changes, schema validation, and regression checks</li>
+          <li>Data‑driven CRO: test hypotheses, ship variants, and iterate based on analytics</li>
+          <li>Automation for product data, metafields, and merchandising workflows</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="skills">
+      <h2 class="section-title">Skills</h2>
+      <p class="section-sub">The languages, tools, and APIs I use to ship production‑ready Shopify solutions.</p>
+      <div class="skills">
+        <div class="card skill-card">
+          <h3 style="margin:0 0 6px 0">Languages</h3>
+          <div class="tags">
+            <span class="tag">Liquid</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">HTML</span>
+            <span class="tag">CSS/SCSS</span>
+            <span class="tag">JSON</span>
+            <span class="tag">GraphQL</span>
+            <span class="tag">REST</span>
+          </div>
+        </div>
+        <div class="card skill-card">
+          <h3 style="margin:0 0 6px 0">Shopify Platform</h3>
+          <div class="tags">
+            <span class="tag">Themes</span>
+            <span class="tag">Sections & Blocks</span>
+            <span class="tag">Metafields</span>
+            <span class="tag">Theme App Extensions</span>
+            <span class="tag">Checkout UI Extensions</span>
+            <span class="tag">Functions</span>
+            <span class="tag">Flow</span>
+          </div>
+        </div>
+        <div class="card skill-card">
+          <h3 style="margin:0 0 6px 0">Apps & Headless</h3>
+          <div class="tags">
+            <span class="tag">Hydrogen</span>
+            <span class="tag">Remix</span>
+            <span class="tag">App Bridge</span>
+            <span class="tag">Polaris</span>
+            <span class="tag">Webhooks</span>
+            <span class="tag">Admin API</span>
+            <span class="tag">Storefront API</span>
+          </div>
+        </div>
+        <div class="card skill-card">
+          <h3 style="margin:0 0 6px 0">Tooling & Ops</h3>
+          <div class="tags">
+            <span class="tag">Shopify CLI</span>
+            <span class="tag">Git</span>
+            <span class="tag">Vite</span>
+            <span class="tag">Webpack</span>
+            <span class="tag">ESBuild</span>
+            <span class="tag">CI/CD</span>
+            <span class="tag">Analytics</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2 class="section-title">Contact</h2>
+      <p class="section-sub">Email: <a href="mailto:you@example.com">you@example.com</a></p>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 [Your Name]. All rights reserved.
+  </footer>
+
+  <script>
+    // Theme toggle
+    const root = document.documentElement;
+    const btn = document.getElementById('themeToggle');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') root.classList.add('light');
+    btn.addEventListener('click', () => {
+      root.classList.toggle('light');
+      localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
+    });
+  </script>
+</body>
+</html>
